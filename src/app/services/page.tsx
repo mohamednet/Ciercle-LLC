@@ -1,0 +1,36 @@
+import { Metadata } from "next";
+import { Suspense } from "react";
+import ServiceTabs from "@/components/ServiceTabs";
+
+export const metadata: Metadata = {
+  title: "Services",
+};
+
+export default function Services() {
+  return (
+    <div className="min-h-screen">
+      {/* Hero */}
+      <section className="pt-24 pb-16 px-6 text-center max-w-4xl mx-auto">
+        <div className="w-14 h-14 bg-primary rounded-2xl flex items-center justify-center mx-auto mb-6 shadow-lg">
+          <span className="material-icons text-white text-2xl">
+            build
+          </span>
+        </div>
+        <h1 className="text-4xl md:text-6xl font-bold tracking-tight text-black dark:text-white mb-4">
+          Our Services
+        </h1>
+        <p className="text-gray-500 dark:text-gray-400 text-lg max-w-2xl mx-auto">
+          End-to-end development services — from mobile apps and web platforms
+          to AI integration and cloud infrastructure.
+        </p>
+      </section>
+
+      {/* Service Tabs */}
+      <section className="max-w-6xl mx-auto px-6 pb-24">
+        <Suspense fallback={null}>
+          <ServiceTabs />
+        </Suspense>
+      </section>
+    </div>
+  );
+}
