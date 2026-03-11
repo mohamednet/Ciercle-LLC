@@ -5,37 +5,6 @@ export const metadata: Metadata = {
   title: "Our Work",
 };
 
-const services = [
-  {
-    icon: "phone_iphone",
-    title: "Mobile Apps",
-    description:
-      "Native and cross-platform apps for iOS and Android. From concept to App Store and Google Play submission.",
-    color: "bg-blue-500",
-  },
-  {
-    icon: "web",
-    title: "Web Applications",
-    description:
-      "Full-stack web platforms, dashboards, and SaaS products built with modern frameworks and scalable architecture.",
-    color: "bg-purple-500",
-  },
-  {
-    icon: "auto_awesome",
-    title: "AI Integration",
-    description:
-      "Smart features powered by machine learning — chatbots, recommendations, computer vision, and natural language processing.",
-    color: "bg-emerald-500",
-  },
-  {
-    icon: "cloud",
-    title: "Cloud & Backend",
-    description:
-      "Robust APIs, microservices, database design, and cloud infrastructure on AWS, GCP, or Firebase.",
-    color: "bg-orange-500",
-  },
-];
-
 const projects = [
   {
     name: "Banking Platform",
@@ -114,42 +83,6 @@ export default function Apps() {
           A selection of projects we&apos;ve built for clients — from mobile
           apps to full-stack web platforms and AI-powered solutions.
         </p>
-      </section>
-
-      {/* Services */}
-      <section className="max-w-5xl mx-auto px-6 mb-20">
-        <div className="text-center mb-12">
-          <p className="font-semibold text-gray-500 dark:text-gray-400 uppercase tracking-widest text-sm mb-4">
-            What We Build
-          </p>
-          <h2 className="text-3xl md:text-5xl font-bold tracking-tight text-black dark:text-white">
-            Our Services
-          </h2>
-        </div>
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-          {services.map((service) => (
-            <div
-              key={service.title}
-              className="bg-white dark:bg-gray-900 border border-gray-200 dark:border-gray-800 rounded-2xl p-6 shadow-sm"
-            >
-              <div className="flex items-center gap-4 mb-4">
-                <div
-                  className={`w-12 h-12 ${service.color} rounded-xl flex items-center justify-center shrink-0`}
-                >
-                  <span className="material-icons text-white text-2xl">
-                    {service.icon}
-                  </span>
-                </div>
-                <h3 className="text-lg font-bold text-black dark:text-white">
-                  {service.title}
-                </h3>
-              </div>
-              <p className="text-sm text-gray-500 dark:text-gray-400 leading-relaxed">
-                {service.description}
-              </p>
-            </div>
-          ))}
-        </div>
       </section>
 
       {/* Web Projects */}
