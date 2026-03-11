@@ -60,11 +60,6 @@ export default function About() {
     <div className="min-h-screen">
       {/* Hero */}
       <section className="pt-24 pb-16 px-6 text-center max-w-4xl mx-auto">
-        <div className="w-14 h-14 bg-primary rounded-2xl flex items-center justify-center mx-auto mb-6 shadow-lg">
-          <span className="material-icons text-white text-2xl">
-            groups
-          </span>
-        </div>
         <h1 className="text-4xl md:text-6xl font-bold tracking-tight text-black dark:text-white mb-4">
           About Ciercle LLC
         </h1>
