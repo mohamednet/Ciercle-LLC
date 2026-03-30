@@ -46,3 +46,13 @@ body {
   -ms-overflow-style: none;
   scrollbar-width: none;
 }
+
+/* Prevent layout shift from Material Icons loading */
+.material-icons,
+.material-symbols-outlined {
+  font-size: 24px;
+  width: 1em;
+  height: 1em;
+  display: inline-block;
+  overflow: hidden;
+}

@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useEffect, useCallback } from "react";
+import { useState, useEffect, useCallback, useRef } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 
 const projects = [
@@ -32,6 +32,8 @@ const projects = [
 
 export default function BrowserPreview() {
   const [current, setCurrent] = useState(0);
+  const [isVisible, setIsVisible] = useState(false);
+  const ref = useRef<HTMLDivElement>(null);
 
   const next = useCallback(() => {
     setCurrent((prev) => (prev + 1) % projects.length);
@@ -42,11 +44,18 @@ export default function BrowserPreview() {
     return () => clearInterval(timer);
   }, [next]);
 
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      ([entry]) => { if (entry.isIntersecting) setIsVisible(true); },
+      { rootMargin: "200px" }
+    );
+    if (ref.current) observer.observe(ref.current);
+    return () => observer.disconnect();
+  }, []);
+
   return (
-    <section className="relative">
-      {/* Video showcase */}
+    <section className="relative" ref={ref}>
       <div className="relative max-w-6xl mx-auto rounded-3xl overflow-hidden shadow-soft dark:shadow-soft-dark">
-        {/* Video */}
         <div className="relative w-full aspect-[16/9] bg-black overflow-hidden">
           <AnimatePresence mode="wait">
             <motion.div
@@ -57,21 +66,22 @@ export default function BrowserPreview() {
               transition={{ duration: 0.8, ease: "easeInOut" }}
               className="absolute inset-0"
             >
-              <video
-                src={projects[current].video}
-                autoPlay
-                muted
-                loop
-                playsInline
-                className="w-full h-full object-cover"
-              />
+              {isVisible && (
+                <video
+                  src={projects[current].video}
+                  autoPlay
+                  muted
+                  loop
+                  playsInline
+                  preload="none"
+                  className="w-full h-full object-cover"
+                />
+              )}
             </motion.div>
           </AnimatePresence>
 
-          {/* Gradient overlay */}
           <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/10 to-transparent pointer-events-none" />
 
-          {/* Project info overlay */}
           <div className="absolute bottom-0 left-0 right-0 p-8">
             <AnimatePresence mode="wait">
               <motion.div

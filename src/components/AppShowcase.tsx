@@ -1,6 +1,6 @@
 "use client";
 
-import { useRef, useEffect } from "react";
+import { useRef, useEffect, useState } from "react";
 import { motion } from "framer-motion";
 
 const apps = [
@@ -23,18 +23,29 @@ const allApps = [...apps, ...apps];
 
 export default function AppShowcase() {
   const scrollRef = useRef<HTMLDivElement>(null);
+  const sectionRef = useRef<HTMLElement>(null);
+  const [isVisible, setIsVisible] = useState(false);
 
   useEffect(() => {
+    const observer = new IntersectionObserver(
+      ([entry]) => { if (entry.isIntersecting) setIsVisible(true); },
+      { rootMargin: "300px" }
+    );
+    if (sectionRef.current) observer.observe(sectionRef.current);
+    return () => observer.disconnect();
+  }, []);
+
+  useEffect(() => {
+    if (!isVisible) return;
     const container = scrollRef.current;
     if (!container) return;
 
     let animationId: number;
     let scrollPos = 0;
-    const speed = 0.5; // pixels per frame
+    const speed = 0.5;
 
     const scroll = () => {
       scrollPos += speed;
-      // Reset when we've scrolled through the first set
       const halfWidth = container.scrollWidth / 2;
       if (scrollPos >= halfWidth) {
         scrollPos = 0;
@@ -45,10 +56,10 @@ export default function AppShowcase() {
 
     animationId = requestAnimationFrame(scroll);
     return () => cancelAnimationFrame(animationId);
-  }, []);
+  }, [isVisible]);
 
   return (
-    <section className="py-24 overflow-hidden">
+    <section className="py-24 overflow-hidden" ref={sectionRef}>
       <div className="text-center mb-16">
         <motion.h2
           initial={{ opacity: 0, y: 20 }}
@@ -70,7 +81,6 @@ export default function AppShowcase() {
         </motion.p>
       </div>
 
-      {/* Scrolling phone carousel */}
       <div
         ref={scrollRef}
         className="flex gap-6 overflow-hidden px-6"
@@ -81,22 +91,21 @@ export default function AppShowcase() {
             key={i}
             className="flex-shrink-0 w-[220px] md:w-[260px]"
           >
-            {/* iPhone frame */}
             <div className="relative bg-black rounded-[2.5rem] p-[6px] shadow-xl">
-              {/* Notch */}
               <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[90px] h-[22px] bg-black rounded-b-2xl z-10" />
-              {/* Screen */}
               <div className="relative rounded-[2.2rem] overflow-hidden bg-gray-900 aspect-[9/19.5]">
-                <video
-                  src={app.video}
-                  autoPlay
-                  muted
-                  loop
-                  playsInline
-                  className="w-full h-full object-cover"
-                />
+                {isVisible && (
+                  <video
+                    src={app.video}
+                    autoPlay
+                    muted
+                    loop
+                    playsInline
+                    preload="none"
+                    className="w-full h-full object-cover"
+                  />
+                )}
               </div>
-              {/* Home indicator */}
               <div className="absolute bottom-2 left-1/2 -translate-x-1/2 w-[100px] h-[4px] bg-gray-600 rounded-full" />
             </div>
           </div>

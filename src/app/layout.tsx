@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import Script from "next/script";
 import { Inter } from "next/font/google";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
@@ -102,23 +103,8 @@ export default function RootLayout({
   return (
     <html lang="en" className="light">
       <head>
-        <link
-          rel="preconnect"
-          href="https://fonts.googleapis.com"
-        />
-        <link
-          rel="preconnect"
-          href="https://fonts.gstatic.com"
-          crossOrigin="anonymous"
-        />
-        <link
-          href="https://fonts.googleapis.com/icon?family=Material+Icons&display=swap"
-          rel="stylesheet"
-        />
-        <link
-          href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap"
-          rel="stylesheet"
-        />
+        <link rel="preconnect" href="https://fonts.googleapis.com" />
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
@@ -128,6 +114,22 @@ export default function RootLayout({
         <Navbar />
         <main>{children}</main>
         <Footer />
+        <Script
+          id="load-material-icons"
+          strategy="afterInteractive"
+          dangerouslySetInnerHTML={{
+            __html: `
+              var l1 = document.createElement('link');
+              l1.rel = 'stylesheet';
+              l1.href = 'https://fonts.googleapis.com/icon?family=Material+Icons&display=swap';
+              document.head.appendChild(l1);
+              var l2 = document.createElement('link');
+              l2.rel = 'stylesheet';
+              l2.href = 'https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap';
+              document.head.appendChild(l2);
+            `,
+          }}
+        />
       </body>
     </html>
   );
