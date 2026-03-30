@@ -4,6 +4,15 @@ import ServiceTabs from "@/components/ServiceTabs";
 
 export const metadata: Metadata = {
   title: "Services",
+  description:
+    "End-to-end development services from Ciercle LLC — mobile apps, web platforms, AI integration, and cloud infrastructure. Built with React, Flutter, Next.js, and more.",
+  alternates: { canonical: "https://cierclellc.com/services" },
+  openGraph: {
+    title: "Our Services | Ciercle LLC",
+    description:
+      "Mobile apps, web platforms, AI integration, and cloud infrastructure. Full-stack development services for businesses of all sizes.",
+    url: "https://cierclellc.com/services",
+  },
 };
 
 export default function Services() {

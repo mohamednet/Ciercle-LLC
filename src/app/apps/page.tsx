@@ -3,6 +3,15 @@ import Link from "next/link";
 
 export const metadata: Metadata = {
   title: "Our Work",
+  description:
+    "Explore our portfolio of web applications, mobile apps, and AI-powered solutions. Banking platforms, dashboards, landing pages, and more — built by Ciercle LLC.",
+  alternates: { canonical: "https://cierclellc.com/apps" },
+  openGraph: {
+    title: "Our Work | Ciercle LLC",
+    description:
+      "Portfolio of web and mobile projects built by Ciercle LLC. 53+ apps shipped across banking, security, e-commerce, and more.",
+    url: "https://cierclellc.com/apps",
+  },
 };
 
 const projects = [

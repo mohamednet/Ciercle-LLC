@@ -3,6 +3,9 @@ import Link from "next/link";
 
 export const metadata: Metadata = {
   title: "Terms of Service",
+  description:
+    "Ciercle LLC terms of service. Read our terms and conditions for using our services and website.",
+  alternates: { canonical: "https://cierclellc.com/terms-of-service" },
 };
 
 const sections = [

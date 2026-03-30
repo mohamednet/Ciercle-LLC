@@ -3,6 +3,15 @@ import ContactForm from "@/components/ContactForm";
 
 export const metadata: Metadata = {
   title: "Contact",
+  description:
+    "Get in touch with Ciercle LLC. Tell us about your project and we'll respond within 24 hours. Email: contact@cierclellc.com. Based in Sheridan, Wyoming.",
+  alternates: { canonical: "https://cierclellc.com/contact" },
+  openGraph: {
+    title: "Contact Us | Ciercle LLC",
+    description:
+      "Have a project idea? Contact Ciercle LLC — we typically respond within 24 hours.",
+    url: "https://cierclellc.com/contact",
+  },
 };
 
 export default function Contact() {

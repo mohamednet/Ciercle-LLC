@@ -3,6 +3,15 @@ import Link from "next/link";
 
 export const metadata: Metadata = {
   title: "About",
+  description:
+    "Learn about Ciercle LLC — a full-stack development studio based in Wyoming, USA. We build web, mobile, and AI solutions with clean code, fast delivery, and long-term support.",
+  alternates: { canonical: "https://cierclellc.com/about" },
+  openGraph: {
+    title: "About Ciercle LLC",
+    description:
+      "Full-stack development studio based in Wyoming, USA. 53+ apps shipped, 1M+ lines of code, 100+ integrations.",
+    url: "https://cierclellc.com/about",
+  },
 };
 
 const values = [
