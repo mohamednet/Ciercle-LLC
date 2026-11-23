@@ -77,6 +77,16 @@ export default function Footer() {
                 Contact
               </Link>
             </li>
+            <li>
+              <a
+                href="https://thestarmoment.com/"
+                target="_blank"
+                rel="noopener"
+                className="hover:text-black dark:hover:text-white transition-colors"
+              >
+                The Star Moment
+              </a>
+            </li>
           </ul>
         </div>
 

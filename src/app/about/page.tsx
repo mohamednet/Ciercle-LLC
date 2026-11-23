@@ -107,6 +107,26 @@ export default function About() {
             </p>
           </div>
         </div>
+
+        {/* Our Own Products */}
+        <div className="bg-gray-50 dark:bg-gray-900 border border-gray-200 dark:border-gray-800 rounded-2xl p-6 md:p-8 mt-6">
+          <h2 className="text-xl font-bold text-black dark:text-white mb-4">
+            Our Own Products
+          </h2>
+          <p className="text-gray-600 dark:text-gray-300 leading-relaxed">
+            We also build our own products.{" "}
+            <a
+              href="https://thestarmoment.com/"
+              target="_blank"
+              rel="noopener"
+              className="font-semibold text-primary hover:underline"
+            >
+              The Star Moment
+            </a>{" "}
+            makes custom star maps: the real night sky of any date and place,
+            as a framed print or a digital download.
+          </p>
+        </div>
       </section>
 
       {/* Values */}

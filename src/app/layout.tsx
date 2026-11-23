@@ -93,6 +93,11 @@ const jsonLd = {
     "Cloud & Backend Development",
     "UI/UX Design",
   ],
+  brand: {
+    "@type": "Brand",
+    name: "The Star Moment",
+    url: "https://thestarmoment.com/",
+  },
 };
 
 export default function RootLayout({

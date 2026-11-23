@@ -1,5 +1,6 @@
 import { Metadata } from "next";
 import Link from "next/link";
+import Image from "next/image";
 
 export const metadata: Metadata = {
   title: "Our Work",
@@ -92,6 +93,63 @@ export default function Apps() {
           A selection of projects we&apos;ve built for clients — from mobile
           apps to full-stack web platforms and AI-powered solutions.
         </p>
+      </section>
+
+      {/* Our Own Products */}
+      <section className="max-w-5xl mx-auto px-6 mb-20">
+        <div className="text-center mb-12">
+          <h2 className="text-3xl md:text-5xl font-bold tracking-tight text-black dark:text-white">
+            Our Own Products
+          </h2>
+        </div>
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+          <div className="bg-white dark:bg-gray-900 border border-gray-200 dark:border-gray-800 rounded-2xl overflow-hidden shadow-sm group md:col-span-2 md:w-[calc(50%-0.75rem)] md:mx-auto">
+            {/* Image Preview */}
+            <div className="relative aspect-[16/9] bg-black overflow-hidden">
+              <Image
+                src="/images/the-star-moment.jpg"
+                alt="The Star Moment website"
+                width={1120}
+                height={630}
+                sizes="(min-width: 768px) 476px, 100vw"
+                className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+              />
+              <div className="absolute top-3 left-3">
+                <span className="bg-black/70 text-white text-xs font-medium px-3 py-1 rounded-full backdrop-blur-sm">
+                  Our product
+                </span>
+              </div>
+            </div>
+            {/* Info */}
+            <div className="p-6">
+              <h3 className="text-lg font-bold text-black dark:text-white mb-2">
+                <a
+                  href="https://thestarmoment.com/"
+                  target="_blank"
+                  rel="noopener"
+                  className="hover:text-primary transition-colors"
+                >
+                  The Star Moment
+                </a>
+              </h3>
+              <p className="text-sm text-gray-500 dark:text-gray-400 leading-relaxed mb-4">
+                An online studio that draws the real night sky of any date and
+                place, with checkout, 300 DPI print files and automatic order
+                fulfilment.
+              </p>
+              <div className="flex flex-wrap gap-2">
+                {["Next.js", "TypeScript", "PostgreSQL"].map((t) => (
+                  <span
+                    key={t}
+                    className="text-xs font-medium bg-gray-100 dark:bg-gray-800 text-gray-600 dark:text-gray-400 px-3 py-1 rounded-full"
+                  >
+                    {t}
+                  </span>
+                ))}
+              </div>
+            </div>
+          </div>
+        </div>
       </section>
 
       {/* Web Projects */}
