@@ -112,6 +112,10 @@ export async function POST(req: NextRequest) {
       );
     }
 
+    // Track whether the message actually reached us
+    let saved = false;
+    let emailed = false;
+
     // Store in SQLite database with sanitized data
     try {
       const { prisma } = await import("@/lib/prisma");
@@ -122,8 +126,10 @@ export async function POST(req: NextRequest) {
           message: trimmedMessage.slice(0, 5000),
         },
       });
-    } catch {
-      // Database failure is non-critical, continue to send email
+      saved = true;
+    } catch (err) {
+      // Keep going: the email below may still deliver the message
+      console.error("[contact] Could not save message to database:", err);
     }
 
     // Send email notification (only if Resend is configured)
@@ -134,7 +140,8 @@ export async function POST(req: NextRequest) {
         const safeEmail = sanitizeForHeader(escapeHtml(trimmedEmail));
         const safeMessage = escapeHtml(trimmedMessage).replace(/\n/g, "<br>");
 
-        await getResend().emails.send({
+        // Resend reports API errors in the result instead of throwing
+        const { error } = await getResend().emails.send({
           from: process.env.EMAIL_FROM || "Ciercle LLC <onboarding@resend.dev>",
           to: process.env.CONTACT_EMAIL || "contact@cierclellc.com",
           subject: `New Contact Form Submission from ${sanitizeForHeader(trimmedName)}`,
@@ -146,9 +153,23 @@ export async function POST(req: NextRequest) {
             <p>${safeMessage}</p>
           `,
         });
-      } catch {
-        // Email failure is non-critical
+        if (error) {
+          console.error("[contact] Email was rejected by Resend:", error);
+        } else {
+          emailed = true;
+        }
+      } catch (err) {
+        console.error("[contact] Could not send email:", err);
       }
+    }
+
+    // Only report success if the message was saved or emailed
+    if (!saved && !emailed) {
+      console.error("[contact] Message was neither saved nor emailed.");
+      return NextResponse.json(
+        { error: "We could not send your message. Please try again or email us directly." },
+        { status: 500 }
+      );
     }
 
     return NextResponse.json({ success: true });

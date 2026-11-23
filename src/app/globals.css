@@ -1,5 +1,10 @@
 @import "tailwindcss";
 
+/* Dark styles apply only under a .dark class, not from the device setting.
+   The site is fixed to light (<html class="light">), so a device in dark
+   mode no longer gets white headings on a white page. */
+@custom-variant dark (&:where(.dark, .dark *));
+
 @theme inline {
   --color-primary: #4d90fe;
   --color-background-light: #ffffff;
